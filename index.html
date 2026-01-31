@@ -4,167 +4,220 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journey of Love</title>
+
+    <!-- GOOGLE FONT (AMAN HP) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
-        /* Desain Dasar */
-        body { font-family: 'Comic Sans MS', cursive, sans-serif; background: #ffebee; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .box { background: white; padding: 40px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); text-align: center; width: 350px; position: absolute; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 0; transform: scale(0.9); pointer-events: none; }
-        .visible { opacity: 1; transform: scale(1); pointer-events: auto; position: relative; }
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background: #ffebee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .box {
+            background: white;
+            padding: 32px;
+            border-radius: 28px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 360px;
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
         .hidden { display: none; }
-        
-        /* Tombol & Input */
-        .btn { padding: 15px 25px; border: none; border-radius: 15px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; margin: 10px; }
-        .btn-primary { background: #ff4757; color: white; width: 100%; }
-        #btn-kangen { background: #ff4757; color: white; position: relative; z-index: 2; }
-        #btn-gak { background: #dfe6e9; color: #636e72; }
-        input { width: 100%; padding: 15px; margin-bottom: 20px; border: 2px solid #ff4757; border-radius: 12px; box-sizing: border-box; outline: none; }
-        
-        /* Dekorasi */
-        .emoji { font-size: 70px; display: block; margin-bottom: 20px; }
+
+        .emoji {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
         h2 { color: #d63031; margin-bottom: 10px; }
         p { color: #636e72; line-height: 1.4; }
-        img.gif-lucu { max-width: 100%; border-radius: 15px; margin-top: 15px; }
 
-        /* Gombalan */
-        #jawaban-gombal { margin-top: 20px; background: #e0f7fa; padding: 15px; border-radius: 10px; font-style: italic; opacity: 0; transition: opacity 0.5s; }
-        .show-answer { opacity: 1 !important; }
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 18px;
+            border: 2px solid #ff4757;
+            border-radius: 12px;
+            outline: none;
+            box-sizing: border-box;
+        }
 
-         /* GALERI SWIPE (HALAMAN 5) */
-        .swipe-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; padding: 10px; scroll-behavior: smooth; }
+        .btn {
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 8px 0;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #ff4757;
+            color: white;
+            width: 100%;
+        }
+
+        #btn-gak {
+            background: #dfe6e9;
+            color: #636e72;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 14px;
+            margin-top: 14px;
+        }
+
+        #jawaban-gombal {
+            margin-top: 16px;
+            background: #e0f7fa;
+            padding: 14px;
+            border-radius: 10px;
+            font-style: italic;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .show-answer { opacity: 1; }
+
+        /* SWIPE GALERI */
+        .swipe-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
         .swipe-container::-webkit-scrollbar { display: none; }
-        .swipe-item { flex: 0 0 100%; scroll-snap-align: center; }
-        .swipe-item img { width: 100%; height: 250px; object-fit: cover; border-radius: 15px; }
+
+        .swipe-item {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+        }
+
+        .swipe-item img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Container untuk semua "halaman" -->
-    <div id="website-container">
+<!-- PAGE 1 -->
+<div id="page-login" class="box visible">
+    <span class="emoji">🎁</span>
+    <h2>Hallo bub</h2>
+    <p>Coba isi nama kamu deh!</p>
+    <input id="inputNama" placeholder="Ketik di sini">
+    <button class="btn btn-primary" onclick="showPage(2)">Masuk</button>
+</div>
 
-        <!-- HALAMAN 1: LOGIN -->
-        <div id="page-login" class="box visible">
-            <span class="emoji">🎁</span>
-            <h2>Hallo bub</h2>
-            <p>Coba isi nama kamu deh!</p>
-            <input type="text" id="inputNama" placeholder="Nih ketik di sini nih">
-            <button class="btn btn-primary" onclick="showPage(2)">Masuk</button>
-        </div>
+<!-- PAGE 2 -->
+<div id="page-kangen" class="box">
+    <span id="icon-tanya" class="emoji">🤔</span>
+    <h2 id="teks-salam"></h2>
+    <p>Kangen aku gasi?</p>
+    <button id="btn-kangen" class="btn btn-primary" onclick="showPage(3)">KANGEN BANGET ❤️</button>
+    <button id="btn-gak" class="btn" onclick="maksaGede()">Dikit doang</button>
+</div>
 
-        <!-- HALAMAN 2: WEBSITE KANGEN -->
-        <div id="page-kangen" class="box">
-            <span id="icon-tanya" class="emoji">🤔</span>
-            <h2 id="teks-salam"></h2>
-            <p>Kangen aku gasi?</p>
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px;">
-                <button id="btn-kangen" class="btn" onclick="showPage(3)">KANGEN BANGET!!! ❤️</button>
-                <button id="btn-gak" class="btn" onclick="maksaGede()">Dikit banget sih</button>
-            </div>
-        </div>
+<!-- PAGE 3 -->
+<div id="page-curhat" class="box">
+    <span class="emoji">😭</span>
+    <h2>Pengen ngeluh</h2>
+    <p>Jadi princes tuh capek, tapi tetep di kangenin 😔</p>
+    <img src="download (11).gif">
+    <button class="btn btn-primary" onclick="showPage(4)">Next</button>
+</div>
 
-        <!-- HALAMAN 3: CURHATAN + GIF -->
-        <div id="page-curhat" class="box">
-            <span class="emoji">😭</span>
-            <h2>Pengen ngeluh dikit</h2>
-            <p>
-                Sumpah hidup jadi seorang princes tuh susah banget tau
-                Mana di kangenin sama kalian gini
-                Aduh maaf ya princes sibuk
-            </p>
-            <!-- Ganti link GIF di bawah -->
-            <img src="download (11).gif" alt="Cute bear gif" class="gif-lucu">
-            <button class="btn btn-primary" onclick="showPage(4)">Klik uy!</button>
-        </div>
+<!-- PAGE 4 -->
+<div id="page-gombal" class="box">
+    <span class="emoji">😏</span>
+    <h2>Aku ada gombalan</h2>
+    <p>Do you know what’s on the menu?</p>
+    <input placeholder="Jawaban kamu">
+    <button class="btn btn-primary" onclick="tampilkanJawaban()">Cek</button>
+    <div id="jawaban-gombal">It’s Me-n-U 😎</div>
+    <button id="btn-next" class="btn btn-primary hidden" onclick="showPage(5)">Lanjut</button>
+</div>
 
-        <!-- HALAMAN 4: GOMBALAN PERTANYAAN -->
-        <div id="page-gombal" class="box">
-            <span class="emoji">😏</span>
-            <h2>Anw aku ada gembelan</h2>
-            <p>Do you know what’s on the menu?</p>
-            <input type="text" placeholder="Coba tebak jawabannya..." id="jawabanTebak">
-            <button class="btn btn-primary" onclick="tampilkanJawaban()">Cek Jawaban!</button>
-            
-            <div id="jawaban-gombal">
-                 It’s Me-n-U BEHH RIZZ ABIS CONGGG
-            </div>
-            <button class="btn btn-primary hidden" id="btn-next-playlist" onclick="showPage(5)">Pencet lagi kak</button>
-        </div>
-        
-        <!-- HALAMAN 5: PLAYLIST MUSIC -->
-        <div id="page-playlist" class="box" style="width: 400px;">
-            <span class="emoji">🎧</span>
-            <h2>Coba liat deh wak</h2>
-            <p>Gas dengerin coy!</p>
-            <a href="https://open.spotify.com/playlist/1k2XEKPVaKvacsszFq2lG8?si=949296bca46942b0&pt=760cbaf396f6856c00dd6894e92f607b">dengerin nih</a>
+<!-- PAGE 5 -->
+<div id="page-playlist" class="box">
+    <span class="emoji">🎧</span>
+    <h2>Playlist nih</h2>
+    <a href="https://open.spotify.com" target="_blank">Dengerin yaa</a>
+    <button class="btn btn-primary" onclick="showPage(6)">Next</button>
+</div>
 
-            <button class="btn btn-primary" onclick="showPage(6)">pencet lagi plicc</button>
-        </div>
-
-        <!-- PAGE 6 -->
+<!-- PAGE 6 -->
 <div id="page-memo" class="box">
     <span class="emoji">📸</span>
-    <h2>APA YA!</h2>
     <div class="swipe-container">
         <div class="swipe-item"><img src="download (19).jfif"></div>
         <div class="swipe-item"><img src="w1.jfif"></div>
         <div class="swipe-item"><img src="w2.jfif"></div>
     </div>
-    <p style="font-size:12px; color:#ff0000;">👈 Geser fotonya kocak 👉</p>
-    <button class="btn btn-primary" onclick="showPage(7)">Terakhir...</button>
+    <p style="font-size:12px;color:#ff4757;">Geser fotonya 👉</p>
+    <button class="btn btn-primary" onclick="showPage(7)">Terakhir</button>
 </div>
 
 <!-- PAGE 7 -->
 <div id="page-terakhir" class="box">
     <span class="emoji">😴</span>
-    <h2>INI YANG TERAKHIR BNRN KOK</h2>
+    <h2>UDAH YA</h2>
     <img src="snoopy jempol.gif">
-    <p>MAKASIH IH UDAH SAMPE HALAMAN INIII EHHEHEHE</p>
+    <p>Makasih udah sampe akhir 💖</p>
 </div>
 
+<script>
+    let scale = 1;
+    const pages = [
+        'page-login','page-kangen','page-curhat',
+        'page-gombal','page-playlist','page-memo','page-terakhir'
+    ];
 
-    </div>
+    function showPage(n) {
+        pages.forEach(id => document.getElementById(id).classList.remove('visible'));
+        document.getElementById(pages[n-1]).classList.add('visible');
 
-    <script>
-        let skala = 1;
-
-        // Fungsi utama untuk navigasi halaman
-        function showPage(pageNumber) {
-            // Sembunyikan semua halaman terlebih dahulu (kecuali login yang sudah visible)
-            document.querySelectorAll('.box').forEach(page => {
-                page.classList.remove('visible');
-            });
-            
-            // Tampilkan halaman yang diminta
-            const targetPage = document.getElementById('page-' + ['login', 'kangen', 'curhat', 'gombal', 'playlist','memo','terakhir'][pageNumber - 1]);
-            targetPage.classList.add('visible');
-
-            // Logika spesifik saat pindah halaman
-            if (pageNumber === 2) {
-                const nama = document.getElementById('inputNama').value;
-                document.getElementById('teks-salam').innerText = "Halo, " + (nama || "Kamu") + "!";
-             }
+        if (n === 2) {
+            const nama = document.getElementById('inputNama').value || 'Kamu';
+            document.getElementById('teks-salam').innerText = `Halo, ${nama}!`;
         }
+    }
 
-        // Logika untuk tombol "Dikit banget sih" (maksa gede)
-        function maksaGede() {
-            skala += 0.8;
-            const btnKangen = document.getElementById('btn-kangen');
-            const icon = document.getElementById('icon-tanya');
-            
-            btnKangen.style.transform = `scale(${skala})`;
-            icon.innerText = "😡"; // Ekspresi marah
-            
-            if(skala > 5) {
-                // Opsional: Langsung pindahkan jika sudah keterlaluan
-                // showPage(3); 
-            }
-        }
+    function maksaGede() {
+        scale += 0.5;
+        document.getElementById('btn-kangen').style.transform = `scale(${scale})`;
+        document.getElementById('icon-tanya').innerText = "😡";
+    }
 
-        // Logika untuk gombalan
-        function tampilkanJawaban() {
-            document.getElementById('jawaban-gombal').classList.add('show-answer');
-            document.getElementById('btn-next-playlist').classList.remove('hidden');
-        }
-    </script>
+    function tampilkanJawaban() {
+        document.getElementById('jawaban-gombal').classList.add('show-answer');
+        document.getElementById('btn-next').classList.remove('hidden');
+    }
+</script>
+
 </body>
 </html>
-
-
